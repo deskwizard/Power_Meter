@@ -53,25 +53,25 @@ With the signal from the measuring board disconnected.
 
 Cable Pinout (from "top" of the measuring board)
 
-1       SCL   To EEPROM (10k pullup on measuring board)
-2       SDA   TO EEPROM (10k pullup on measuring board)
-3       PB0   Mains Power Detection (~2.7v)
-4       PB1   MCU UART RX (1k resistor in series near BL6523GX)
-5       PB2   MCU UART TX (1k resistor in series near BL6523GX)
-6       GND   *** LIVE REFERENCED!!! ***
-7       VCC   ~3.6V when on battery
-8       ~12V
+*1       SCL   To EEPROM (10k pullup on measuring board)
+*2       SDA   TO EEPROM (10k pullup on measuring board)
+*3       PB0   Mains Power Detection (~2.7v)
+*4       PB1   MCU UART RX (1k resistor in series near BL6523GX)
+*5       PB2   MCU UART TX (1k resistor in series near BL6523GX)
+*6       GND   *** LIVE REFERENCED!!! ***
+*7       VCC   ~3.6V when on battery
+*8       ~12V
 
 
 2 pin pads on display board (from board edge)
-1       Down button
-2       Up button  (1 silkscreen beside it)
+*1       Down button
+*2       Up button  (1 silkscreen beside it)
 
 
 3 pin pads on display board (from board edge)
-1       VCC
-2       GND
-3       TBD (only connected to mcu)
+*1       VCC
+*2       GND
+*3       TBD (only connected to mcu)
 
 Those two together make me thing of a programming port. Who knows...
 
