@@ -23,8 +23,11 @@ The capacitive dropper capacitor is 1uF instead of 0.47uF (half the voltage, dou
 The in-rush limiting resistor stayed at 100 ohms.
 
 The metering chip is a BL6523GX from Shanghai Belling.
-Product page: http://www.belling.com.cn/en/product_info.html?id=11
-English datasheet: https://s1.dtsheet.com/store/data/001450378.pdf?key=5f9d204f04c58b2e016a2c724a615611&r=1
+
+Product page: 
+[http://www.belling.com.cn/en/product_info.html?id=11]
+
+English datasheet: [https://s1.dtsheet.com/store/data/001450378.pdf?key=5f9d204f04c58b2e016a2c724a615611&r=1]
 
 The mains power detection circuitry is different, there is no transistor on the measuring board.
 (More below.)
@@ -52,26 +55,29 @@ PB0 High enables the circuit.
 With the signal from the measuring board disconnected.
 
 Cable Pinout (from "top" of the measuring board)
+>
+1.       SCL  To EEPROM
+2.       SDA   To EEPROM
+3.       PB0   Mains Power Detection (~2.7v)
+4.       PB1   MCU UART RX (1k resistor in series near BL6523GX)
+5.       PB2   MCU UART TX (1k resistor in series near BL6523GX)
+6.       GND   *** LIVE REFERENCED!!! ***
+7.       VCC   ~3.6V when on battery
+80       ~12V
+>
 
-*1       SCL   To EEPROM (10k pullup on measuring board)
-*2       SDA   TO EEPROM (10k pullup on measuring board)
-*3       PB0   Mains Power Detection (~2.7v)
-*4       PB1   MCU UART RX (1k resistor in series near BL6523GX)
-*5       PB2   MCU UART TX (1k resistor in series near BL6523GX)
-*6       GND   *** LIVE REFERENCED!!! ***
-*7       VCC   ~3.6V when on battery
-*8       ~12V
+3 pin pads on display board (from board edge)
+>
+1.       Down button
+2.       Up button  (1 silkscreen beside it)
 
-
-2 pin pads on display board (from board edge)
-*1       Down button
-*2       Up button  (1 silkscreen beside it)
 
 
 3 pin pads on display board (from board edge)
-*1       VCC
-*2       GND
-*3       TBD (only connected to mcu)
+>
+1.       VCC
+2.       GND
+3.       TBD (only connected to mcu)
 
 Those two together make me thing of a programming port. Who knows...
 
