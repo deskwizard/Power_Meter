@@ -1,0 +1,62 @@
+Format: 
+CMD, ADRR, DATA_L, DATA_M, DATA_H, SUM
+
+
+Sum calculation (from datasheet):
+SUM = (Addr+Data_L+Data_M+Data_H) & 0xFF, then byte invert
+
+Commands:
+CA = Write
+35 = Read
+
+
+Numbers between brackets are the bit number(s).
+All others are in hex.
+
+
+On mains power enable:
+
+First does these writes:
+
+CA 3E 55 00 00 6C       Write WRPROT register with 0x55
+                        Write protection register, 0x55 = writable
+
+
+CA 14 00 00 10 DB       Write MODE register with 0x10
+Page 11: 
+[1:0] = 00      Set metering channel to A
+[4:2] = 000     Enable all high-pass filters
+[9:8] = 01      Positive-only energy accumulation
+[11:10] = 00    Current imbalance judgment 12.5% (default)
+
+Page 7:
+[6] = 0         Disable timing anti-creep function
+Other bits in the MODE register are not mentionned in datasheet.
+
+
+CA 15 04 00 00 E6       Write GAIN register with 0x04
+Page 6:
+Gain for channel A current set to 16x
+Rest at default (0)
+
+
+CA 19 08 00 00 DE       Write WA_CFDIV register with 0x08 (Active power CF frequency divider)
+Page 9: 
+CF output frequency only used for calibration, not actually connected in circuit.
+
+
+CA 3E AA 00 00 17       Write WRPROT register with 0xAA 
+                        Write protection register, 0xAA = not writable?
+
+
+
+Then repeats those reads over and over:
+
+35 05       Read IA_RMS register
+35 07       Read V_RMS register
+35 09       Read FREQ register
+35 A0       Read A_WATT (Average active power of Channel A)
+35 08       Read PF register (Power Factor)
+35 0C       Read WATTHR (Active Energy)
+
+

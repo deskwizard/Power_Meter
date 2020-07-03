@@ -1,0 +1,29 @@
+Dump of the meter's EEPROM
+
+Considering the way it was dumped, it might not be accurate.
+
+The meter was used overnight before dumping, so I don't know if the 
+sparse data that's in there is calibration information or something else.
+I did not set a kwh price value, so that's probably not related to that.
+
+How it was dumped:
+Since I don't have an EEPROM reader/programmer, I had to resort to other measures.
+I used that, running on an ESP32 since it's the only 3.3v board I had available.
+
+https://github.com/DMRodrigues/arduino-i2c-read-eeprom
+
+Note: 
+If you get the following error when compiling: "undefined reference to 'print_eeprom'
+Edit the 'eeprom.h' file, removing 'inline' from line 38.
+
+The command used is as follows (see github project page for more details):
+i2c_read_eeprom -t /dev/ttyUSB0 -n 2048 -o EEPROM_dump.bin -d 1
+
+That command was the only one that gave me consistent results.
+
+I did disconnect the i²c lines from the display board before dumping so that the
+two masters don't fight each other.
+
+The EEPROM address (all address pins grounded) is 0x50.
+
+The pullups (10k) are on the measuring board.
