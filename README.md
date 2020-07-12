@@ -16,6 +16,18 @@ My best guess is a cut-down version of the one with backlight. More below.
 
 *** THIS VERSION IS ALSO LIVE REFERENCED - BEWARE!! ***
 
+That means don't connect anything that is connected to mains to that device, it will short Live to Neutral,
+you're going to have a bad day.
+
+I assume precisely NO responsability for ANYTHING you do or happen to you.
+You've been warned.
+
+If you want to connect to the device, either use a laptop (NOT connected to mains) or the opto isolation schematic located in this folder.
+
+Note that the resistor values used had to be tweaked to get proper signaling. You might have to do the same depending on your exact device and/or opto couplers used.
+
+The 12V line is used to sense the mains enable in this circuit, the original signal can not be used for this purpose as any load put on it will drag it down. (Metering chip voltage reference ?)
+
 
 Differences:
 
@@ -36,40 +48,42 @@ The ICs on the display board have been replaced by an epoxy blob.
 (Educated guess: a microcontroller with LCD display driver but no EEPROM.)
 
 The backlight circuitry is present and working as expected, but no backlight is installed.
-The backlight functions only with mains power applied (as the 12v supply is generated from mains).
+The backlight functions only with mains power applied (since the 12v supply is generated from mains).
 
 An i²c EEPROM (P/N 24C02A @ address 0x50) has been added to save/restore data, and it's always powered.
-(See EEPROM folder for more on that. Work in progress...)
+(See EEPROM folder for more on that.)
 
 The cable between the boards have 2 more pins, SCL and SDA for communication with the EEPROM.
 
 
 More informations:
 
-The microcontroller doesn't check for chip presence, so giving the MCU the "mains is there" signal was sufficient
-to trick it. See the serial.txt file for it's output.
+The microcontroller doesn't check for the metering chip presence, so giving the MCU the "mains is there" signal was sufficient to trick it. 
+See the serial.txt file for it's output.
 Nice part of this is, no mains connected, and no risk of blowing stuff up.
 
-PB0 High enables the circuit. 
+PB0 High is mains power detection and enables the circuit. 
+
+Faking that signal:
 ~2.7V-2.9V tested with a voltage divider from VCC (1K) / GROUND (10K), probably good up to VCC.
 With the signal from the measuring board disconnected.
 
 Cable Pinout (from "top" of the measuring board)
 >
-1.       SCL  To EEPROM
+1.       SCL   To EEPROM
 2.       SDA   To EEPROM
 3.       PB0   Mains Power Detection (~2.7v)
 4.       PB1   MCU UART RX (1k resistor in series near BL6523GX)
 5.       PB2   MCU UART TX (1k resistor in series near BL6523GX)
 6.       GND   *** LIVE REFERENCED!!! ***
 7.       VCC   ~3.6V when on battery
-80       ~12V
+8.       ~12V
 >
 
 3 pin pads on display board (from board edge)
 >
 1.       Down button
-2.       Up button  (1 silkscreen beside it)
+2.       Up button  ('1' silkscreen beside it)
 
 
 

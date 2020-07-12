@@ -46,7 +46,7 @@ CF output frequency only used for calibration, not actually connected in circuit
 
 
 CA 3E AA 00 00 17       Write WRPROT register with 0xAA 
-                        Write protection register, 0xAA = not writable?
+                        Write protection register, 0xAA = not writable
 
 
 

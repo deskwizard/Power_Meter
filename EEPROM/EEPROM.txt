@@ -1,0 +1,39 @@
+Reads on power up (in the order they are accessed)
+
+Returned data is NACK'd (easy to spot)
+
+Address 0x42 is 0x00 for some reason. TBD.
+
+Block 1 - Current
+Read 0x10   0x7D
+Read 0x11   0x6D
+Read 0x12   0x0A
+
+Block 2 - Voltage
+Read 0x20   0x31
+Read 0x21   0x31
+Read 0x22   0x2C
+
+Block 3 - Watts
+Read 0x30   0x08
+Read 0x31   0x46
+Read 0x32   0x05
+
+Block 4 - TBD
+Read 0x40   0x25
+Read 0x41   0x2B
+
+
+Considering the fact most registers are 24bits on the meatering chip... 
+
+it's probably either
+#1 :    0x7D6D0A   or   0x0A6D7D    (Dec.  8219914 or 683389)
+#2 :    0x31312C   or   0x2C3131    (Dec.  3223852 or 2896177)
+#3 :    0x084605   or   0x054608    (Dec.  542213 or 345608)
+
+#4 :    0x252B     or   0x2B25      (Dec.  9515 or 11045)
+
+Since address 0x42 is 0x00, maybe it's 24bits also, but they ended up hard-coding the last byte to 0x00
+in which case:
+
+#4 :    0x252B00   or   0x002B25    (Dec.  2435840 or 11045)
